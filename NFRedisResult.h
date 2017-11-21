@@ -19,7 +19,7 @@ public:
 
     void Reset();
 
-    bool ReadReply(const NFREDIS_RESP_TYPE expectRespType);
+    bool ReadReply();
 
     NFREDIS_RESULT_STATUS GetResultType();
     NFREDIS_RESP_TYPE GetRespType();

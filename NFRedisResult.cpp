@@ -9,7 +9,7 @@ NFRedisResult::NFRedisResult(NFRedisClientSocket *pClientSocket)
     m_pClientSocket = pClientSocket;
 }
 
-bool NFRedisResult::ReadReply(const NFREDIS_RESP_TYPE expectRespType)
+bool NFRedisResult::ReadReply()
 {
     Reset();
     //1 get resptype---readN
@@ -79,11 +79,6 @@ bool NFRedisResult::ReadReply(const NFREDIS_RESP_TYPE expectRespType)
     mxResultStatus = NFREDIS_RESULT_STATUS::NFREDIS_RESULT_STATUS_OK;
 
     if (!bRet)
-    {
-        return false;
-    }
-
-    if (expectRespType != mxRespType)
     {
         return false;
     }
@@ -303,6 +298,14 @@ bool NFRedisResult::ReadForError()
 
 bool NFRedisResult::ReadForInt()
 {
+    std::string line;
+    if (m_pClientSocket->ReadLine(line))
+    {
+        mstrMsgValue.append(line);
+
+        return true;
+    }
+
     return false;
 }
 

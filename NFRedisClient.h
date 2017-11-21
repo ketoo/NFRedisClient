@@ -42,16 +42,37 @@ public:
     bool Execute();
 
     NFRedisResult* GetRedisResult();
+/*
+    AUTH
+    ECHO
+    PING
+    QUIT
+    SELECT
+    */
     /////////client key//////////////
 
     NFRedisResult* DEL(const std::string& key);
-    NFRedisResult* DEL(const std::vector<std::string>& keys);
-
-    NFRedisResult* DUMP(const std::string& key, std::string& out);
+    //NFRedisResult* DUMP(const std::string& key, std::string& out);
 
     NFRedisResult* EXISTS(const std::string& key);
-
-
+    NFRedisResult* EXPIRE(const std::string& key, const unsigned int secs);
+    NFRedisResult* EXPIREAT(const std::string& key, const int64_t unixTime);
+    //NFRedisResult* KEYS(const std::string& key);
+    //NFRedisResult* MIGRATE(const std::string& key);
+    //NFRedisResult* MOVE(const std::string& key);
+    //NFRedisResult* OBJECT(const std::string& key);
+    NFRedisResult* PERSIST(const std::string& key);
+    //NFRedisResult* PEXPIRE(const std::string& key);
+    //NFRedisResult* PEXPIREAT(const std::string& key);
+    //NFRedisResult* PTTL(const std::string& key);
+    //NFRedisResult* RANDOMKEY(const std::string& key);
+    //NFRedisResult* RENAME(const std::string& key);
+    //NFRedisResult* RENAMENX(const std::string& key);
+    //NFRedisResult* RESTORE(const std::string& key);
+    //NFRedisResult* SORT(const std::string& key);
+    NFRedisResult* TTL(const std::string& key);
+    NFRedisResult* TYPE(const std::string& key);
+    //NFRedisResult* SCAN(const std::string& key);
     /////////client String//////////////
 
     NFRedisResult* APPEND(const std::string& key, const std::string& value);
@@ -83,15 +104,111 @@ public:
     //NFRedisResult* SETRANGE(const std::string& key);
     NFRedisResult* STRLEN(const std::string& key);
 
+    /////////client hash//////////////
+    NFRedisResult* HDEL(const std::string& key, const std::string& field);
+    NFRedisResult* HEXISTS(const std::string& key, const std::string& field);
+    NFRedisResult* HGET(const std::string& key, const std::string& field);
+    NFRedisResult* HGETALL(const std::string& key, std::vector<string_pair>& values);
+    NFRedisResult* HINCRBY(const std::string& key, const std::string& field, const int by);
+    NFRedisResult* HINCRBYFLOAT(const std::string& key, const std::string& field, const float by);
+    NFRedisResult* HKEYS(const std::string& key, std::vector<std::string>& fields);
+    NFRedisResult* HLEN(const std::string& key);
+    NFRedisResult* HMGET(const std::string& key, const string_vector& fields, string_vector& values);
+    NFRedisResult* HMSET(const std::string& key, const std::vector<string_pair>& values);
+    NFRedisResult* HSET(const std::string& key, const std::string& field, const std::string& value);
+    NFRedisResult* HSETNX(const std::string& key, const std::string& field, const std::string& value);
+    NFRedisResult* HVALS(const std::string& key, string_vector& values);
+    //NFRedisResult* HSCAN(const std::string& key, const std::string& field);
+    NFRedisResult* HSTRLEN(const std::string& key, const std::string& field);
 
+    /////////client list//////////////
+    //NFRedisResult* BLPOP(const std::string& key, string_vector& values);
+    //NFRedisResult* BRPOP(const std::string& key, string_vector& values);
+    //NFRedisResult* BRPOPLPUSH(const std::string& key, string_vector& values);
+    NFRedisResult* LINDEX(const std::string& key, const int index);
+    //NFRedisResult* LINSERT(const std::string& key, const std::string& value1, const std::string& value2);
+    NFRedisResult* LLEN(const std::string& key);
+    NFRedisResult* LPOP(const std::string& key);
+    NFRedisResult* LPUSH(const std::string& key, const std::string& value);
+    NFRedisResult* LPUSHX(const std::string& key, const std::string& value);
+    NFRedisResult* LRANGE(const std::string& key, const int start, const int end, string_vector& values);
+    //NFRedisResult* LREM(const std::string& key, string_vector& values);
+    NFRedisResult* LSET(const std::string& key, const int index, const std::string& value);
+    //NFRedisResult* LTRIM(const std::string& key, string_vector& values);
+    NFRedisResult* RPOP(const std::string& key);
+    //NFRedisResult* RPOPLPUSH(const std::string& key, string_vector& values);
+    NFRedisResult* RPUSH(const std::string& key, const std::string& value);
+    NFRedisResult* RPUSHX(const std::string& key, const std::string& value);
+
+    /////////client set//////////////
+    /*
+    NFRedisResult* SADD(const std::string& key, const std::string& value);
+    NFRedisResult* SCARD(const std::string& key, const std::string& value);
+    NFRedisResult* SDIFF(const std::string& key, const std::string& value);
+    NFRedisResult* SDIFFSTORE(const std::string& key, const std::string& value);
+    NFRedisResult* SINTER(const std::string& key, const std::string& value);
+    NFRedisResult* SINTERSTORE(const std::string& key, const std::string& value);
+    NFRedisResult* SISMEMBER(const std::string& key, const std::string& value);
+    NFRedisResult* SMEMBERS(const std::string& key, const std::string& value);
+    NFRedisResult* SMOVE(const std::string& key, const std::string& value);
+    NFRedisResult* SPOP(const std::string& key, const std::string& value);
+    NFRedisResult* SRANDMEMBER(const std::string& key, const std::string& value);
+    NFRedisResult* SREM(const std::string& key, const std::string& value);
+    NFRedisResult* SUNION(const std::string& key, const std::string& value);
+    NFRedisResult* SUNIONSTORE(const std::string& key, const std::string& value);
+    NFRedisResult* SSCAN(const std::string& key, const std::string& value);
+*/
+
+    /////////client SortedSet//////////////
+    /*
+    NFRedisResult* ZADD(const std::string& key, const std::string& member, const double score);
+    NFRedisResult* ZCARD(const std::string& key, const std::string& value);
+    NFRedisResult* ZCOUNT(const std::string& key, const double start, const double end);
+    NFRedisResult* ZINCRBY(const std::string& key, const std::string& value);
+    NFRedisResult* ZRANGE(const std::string& key, const std::string& value);
+    NFRedisResult* ZRANGEBYSCORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZRANK(const std::string& key, const std::string& value);
+    NFRedisResult* ZREM(const std::string& key, const std::string& value);
+    NFRedisResult* ZREMRANGEBYRANK(const std::string& key, const std::string& value);
+    NFRedisResult* ZREMRANGEBYSCORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZREVRANGE(const std::string& key, const std::string& value);
+    NFRedisResult* ZREVRANGEBYSCORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZREVRANK(const std::string& key, const std::string& value);
+    NFRedisResult* ZSCORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZUNIONSTORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZINTERSTORE(const std::string& key, const std::string& value);
+    NFRedisResult* ZSCAN(const std::string& key, const std::string& value);
+    NFRedisResult* ZRANGEBYLEX(const std::string& key, const std::string& value);
+    NFRedisResult* ZLEXCOUNT(const std::string& key, const std::string& value);
+    NFRedisResult* ZREMRANGEBYLEX(const std::string& key, const std::string& value);
+*/
+
+    /////////client GEO//////////////
+
+    /*
+    NFRedisResult* GEOADD(const std::string& key, const std::string& value);
+    NFRedisResult* GEOPOS(const std::string& key, const std::string& value);
+    NFRedisResult* GEODIST(const std::string& key, const std::string& value);
+    NFRedisResult* GEORADIUS(const std::string& key, const std::string& value);
+    NFRedisResult* GEORADIUSBYMEMBER(const std::string& key, const std::string& value);
+    NFRedisResult* GEOHASH(const std::string& key, const std::string& value);
+*/
+
+    /////////client PUB SUB//////////////
+/*
+    NFRedisResult* PSUBSCRIBE(const std::string& key, const std::string& value);
+    NFRedisResult* PUBLISH(const std::string& key, const std::string& value);
+    NFRedisResult* PUBSUB(const std::string& key, const std::string& value);
+    NFRedisResult* PUNSUBSCRIBE(const std::string& key, const std::string& value);
+    NFRedisResult* SUBSCRIBE(const std::string& key, const std::string& value);
+    NFRedisResult* UNSUBSCRIBE(const std::string& key, const std::string& value);
+ */
     /////////client server//////////////
     NFRedisResult* FLUSHALL();
     NFRedisResult* FLUSHDB();
 
 private:
 
-
-    bool GetReply();
 
     bool GetStatusReply();
     bool GetIntReply();

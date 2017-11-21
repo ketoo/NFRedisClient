@@ -89,6 +89,13 @@ void NFRedisTester::TestString()
     pRedisResult = mxRedisClient.GET("test1");
     std::cout << pRedisResult->GetRespString() << "  " << std::endl;
 
+    std::cout << "test cmd: APPEND" << std::endl;
+    pRedisResult = mxRedisClient.APPEND("test", value);
+    std::cout << pRedisResult->GetRespInt() << "  " << std::endl;
+
+    std::cout << "test cmd: APPEND" << std::endl;
+    pRedisResult = mxRedisClient.APPEND("test", value);
+    std::cout << pRedisResult->GetRespInt() << "  " << std::endl;
 
 
     std::cout << "test cmd: MSET" << std::endl;

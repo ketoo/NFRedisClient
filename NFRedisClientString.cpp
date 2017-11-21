@@ -8,37 +8,154 @@
 
 NFRedisResult *NFRedisClient::APPEND(const std::string &key, const std::string &value)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("APPEND");
+    cmd << key;
+    cmd << value;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetIntReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::DECR(const std::string &key)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("DECR");
+    cmd << key;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::DECRBY(const std::string &key, const int64_t v)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("DECRBY");
+    cmd << key;
+    cmd << v;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::GETSET(const std::string &key, const std::string &value)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("GETSET");
+    cmd << key;
+    cmd << value;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::INCR(const std::string &key)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("INCR");
+    cmd << key;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::INCRBY(const std::string &key, const int64_t v)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("INCRBY");
+    cmd << key;
+    cmd << v;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::INCRBYFLOAT(const std::string &key, const float fv)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("INCRBYFLOAT");
+    cmd << key;
+    cmd << fv;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::MGET(const string_vector &keys, string_vector &values)
@@ -94,17 +211,68 @@ NFRedisResult *NFRedisClient::MSET(const string_pair_vector &values)
 
 NFRedisResult *NFRedisClient::SETEX(const std::string &key, const std::string &value, int time)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("SETEX");
+    cmd << key;
+    cmd << value;
+    cmd << time;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::SETNX(const std::string &key, const std::string &value)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("SETNX");
+    cmd << key;
+    cmd << value;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 NFRedisResult *NFRedisClient::STRLEN(const std::string &key)
 {
-    return nullptr;
+    m_pRedisResult->Reset();
+
+    NFRedisCommand cmd("STRLEN");
+    cmd << key;
+
+    std::string msg = cmd.Serialize();
+
+    int nRet = m_pRedisClientSocket->Write(msg.data(), msg.length());
+    if (nRet != 0)
+    {
+        //mxRedisResult
+        return m_pRedisResult;
+    }
+
+    GetStatusReply();
+
+    return m_pRedisResult;
 }
 
 
